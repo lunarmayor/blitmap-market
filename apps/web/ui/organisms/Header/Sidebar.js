@@ -102,9 +102,9 @@ const Sidebar = ({ open, onClose, collections }) => {
         <Box p={3}>
           {currentUser && (
             <Flex mt={4}>
-              <Link href={`/adventurers/${currentUser.address}`}>
+              <Link href={`/owners/${currentUser.address}`}>
                 <a>
-                  <NavItem>My Loot</NavItem>
+                  <NavItem>My Room</NavItem>
                 </a>
               </Link>
             </Flex>

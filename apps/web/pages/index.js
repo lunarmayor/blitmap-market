@@ -32,7 +32,7 @@ import { formatEther } from "@ethersproject/units";
 import Header from "@ui/organisms/Header";
 import CollectionStats from "@ui/organisms/CollectionStats";
 import ItemSelector from "@ui/organisms/ItemSelector";
-import NFT from "@ui/organisms/NFTs/Loot";
+import NFT from "@ui/organisms/GenericNFT";
 import loot from "../public/community.png";
 import useInfiniteScroll from "react-infinite-scroll-hook";
 import useExchangeRate from "@hooks/useExchangeRate";
@@ -55,6 +55,13 @@ const IconButton = ({ icon, ...props }) => (
     {icon}
   </Box>
 );
+
+const Stat = styled(H2)`
+  font-weight: 600;
+  font-style: unset;
+  color: rgba(255, 255, 255, 0.9);
+  font-family: helvetica neue;
+`;
 
 const CollectionGrid = styled.div`
   display: grid;
@@ -106,6 +113,7 @@ const CollectionCard = ({ image, name, description }) => (
     sx={{
       cursor: "pointer"
     }}
+    border="1px solid rgba(255,255,255,0.20)"
   >
     <Box height={0} paddingBottom="100%" w={1} position="relative">
       <Box position="absolute" top={0} bottom={0} left={0} right={0}>
@@ -117,16 +125,17 @@ const CollectionCard = ({ image, name, description }) => (
             right: 0,
             bottom: 0,
             left: 0,
+            height: "100%",
             objectFit: "cover"
           }}
         />
       </Box>
     </Box>
-    <Box bg="#1F3744" p={3} flex={1}>
-      <H2 fontSize={24} m={0}>
+    <Box bg="rgba(255,255,255,0.05)" p={3} flex={1}>
+      <H2 fontSize={20} m={0}>
         {name}
       </H2>
-      <P mt={1} color="textSecondary">
+      <P mt={1} color="textSecondary" fontSize={14}>
         {description}
       </P>
     </Box>
@@ -144,17 +153,16 @@ const Home = () => {
 
   const [item, setItem] = useState(null);
   const { items, loading, fetchMore, moreLeft } = useItems({
-    collection: nameToContractMap.loot.collection
+    collection: "boredapeyachtclub"
   });
-  const collection = useCollection(nameToContractMap.loot.collection);
+  const collection = useCollection("boredapeyachtclub");
 
   return (
     <Flex flex={1} flexDirection="column" bg="background">
       <Header />
       <Box position="relative">
         <Flex
-          //bg="#140F0F"
-          bg="#1e2b4d"
+          bg="primary"
           p={4}
           pt={[4, 5]}
           pb={"100px"}
@@ -163,27 +171,39 @@ const Home = () => {
         >
           <Box maxWidth={920} width={["100%", "100%", "100%", "920px"]}>
             <Flex>
-              <img src="/exchangeIcon.svg" width={50} />
+              <img
+                style={{
+                  backgroundColor: "rgba(0,0,0,0.05)",
+                  padding: 8,
+                  borderRadius: "50%"
+                }}
+                src="/byaclogotransparent.png"
+                width={100}
+              />
               <H1
                 ml={4}
                 fontFamily="body"
-                fontSize={[16, 24]}
+                fontSize={[16, 32]}
                 fontWeight={900}
                 maxWidth="640px"
+                color="black"
+                sx={{
+                  fontStyle: "italic",
+                  textTransform: "uppercase"
+                }}
               >
-                Buy, sell, and explore
-                <br /> all things Loot
+                Welcome to the <br />
+                Ape Exchange
               </H1>
             </Flex>
             <P
               mt={3}
-              fontSize={[14, 16]}
-              fontWeight={200}
-              color="textSecondary"
+              fontSize={[14, 18]}
+              color="rgba(0,0,0,0.8)"
               maxWidth="640px"
             >
-              A Loot community marketplace with 0% marketplace fees and
-              community royalties. The adventure awaits.
+              A BAYC community marketplace with 0% marketplace fees and
+              community royalties. Join the club.
             </P>
           </Box>
         </Flex>{" "}
@@ -201,16 +221,21 @@ const Home = () => {
             <Pane bg="black">
               <a href="https://www.royaltydao.com/">
                 <Box p={3}>
-                  <P mb={1} color="textSecondary">
+                  <P
+                    fontWeight={900}
+                    fontStyle={"italic"}
+                    mb={1}
+                    color="textSecondary"
+                  >
                     Treasury
                   </P>
-                  <H2>
+                  <Stat>
                     Ξ
                     {treasury
                       ? shortenNumber(Number(formatEther(treasury || 0)))
                       : 0}
-                  </H2>
-                  <P mt={-1} color="textSecondary">
+                  </Stat>
+                  <P mt={-1} color="primary">
                     {treasury
                       ? formatMoney(formatEther(treasury) * exchangeRate)
                       : 0}
@@ -221,11 +246,16 @@ const Home = () => {
             <Pane bg="black" display={["none", "none", "block", "block"]}>
               <a href="https://www.royaltydao.com/">
                 <Box p={3}>
-                  <P mb={1} color="textSecondary">
+                  <P
+                    fontWeight={900}
+                    fontStyle={"italic"}
+                    mb={1}
+                    color="textSecondary"
+                  >
                     Open Proposals
                   </P>
-                  <H2>0</H2>
-                  <P mt={-1} color="textSecondary">
+                  <Stat>0</Stat>
+                  <P mt={-1} color="primary">
                     0 closed
                   </P>
                 </Box>
@@ -235,13 +265,18 @@ const Home = () => {
               <Link href="/collections/loot">
                 <a>
                   <Box p={3}>
-                    <P mb={1} color="textSecondary">
-                      Loot Floor
+                    <P
+                      fontWeight={900}
+                      fontStyle={"italic"}
+                      mb={1}
+                      color="textSecondary"
+                    >
+                      BAYC Floor
                     </P>
-                    <H2>
+                    <Stat>
                       Ξ{collection ? shortenNumber(collection.floor || 0) : 0}
-                    </H2>
-                    <P mt={-1} color="textSecondary">
+                    </Stat>
+                    <P mt={-1} color="primary">
                       {collection
                         ? formatMoney(collection.floor * exchangeRate)
                         : 0}
@@ -261,36 +296,37 @@ const Home = () => {
         pt={"100px"}
       >
         <H2 my={4} color="textSecondary" fontSize={24}>
-          Loot Collections
+          BAYC Collections
         </H2>
         <CollectionGrid>
-          <Link href="/collections/more-loot">
+          <Link href="/collections/boredapeyachtclub">
             <a>
               <CollectionCard
-                image="/mLootCard.png"
-                name={"mLoot"}
-                description={`More Adventurers to start your journey.`}
+                image="/apeCollectionImage.png"
+                padding
+                name={"Bored Ape Yacht Club"}
+                description="a collection of 10,000 unique Bored Ape NFTs— unique digital collectibles living on the Ethereum blockchain."
               />
             </a>
           </Link>
-          <Link href="/collections/loot">
+          <Link href="/collections/mutant-ape-yacht-club">
             <a>
               <CollectionCard
-                image="/lootbag.png"
-                name={"Loot"}
+                image="https://lh3.googleusercontent.com/lHexKRMpw-aoSyB1WdFBff5yfANLReFxHzt1DOj_sg7mS14yARpuvYcUtsyyx-Nkpk6WTcUPFoG53VnLJezYi8hAs0OxNZwlw6Y-dmI=s0"
+                name={"Mutant Ape Yacht Club"}
                 description={
-                  "The original Adventurers. Only 8,000 exist. Are you worthy of such power?"
+                  "A collection of up to 20,000 Mutant Apes that can only be created by exposing an existing Bored Ape to a vial of MUTANT SERUM"
                 }
               />
             </a>
           </Link>
-          <Link href="/collections/genesisadventurer">
+          <Link href="/collections/bored-ape-kennel-club">
             <a>
               <CollectionCard
-                image="/genesis.png"
-                name={"Genesis"}
+                image="https://lh3.googleusercontent.com/l1wZXP2hHFUQ3turU5VQ9PpgVVasyQ79-ChvCgjoU5xKkBA50OGoJqKZeMOR-qLrzqwIfd1HpYmiv23JWm0EZ14owiPYaufqzmj1=s0"
+                name={"Bored Ape Kennel Club"}
                 description={
-                  "The 2,540 champions of the loot ancentral orders."
+                  "It gets lonely in the swamp sometimes. That's why every ape should have a four-legged companion."
                 }
               />
             </a>
@@ -299,19 +335,19 @@ const Home = () => {
       </Flex>
       <Box p={[3, 4]} alignItems="center" flexDirection="column">
         <H2 mb={3} color="textSecondary" fontSize={24}>
-          Entry Bags
+          Entry Apes
         </H2>
 
         <Grid>
-          {items.slice(0, 6).map(bag => (
-            <Link href={`/collections/loot/${bag.id}`} key={bag.id}>
+          {items.map(bag => (
+            <Link href={`/collections/${bag.contract}/${bag.id}`} key={bag.id}>
               <a>
                 <NFT item={bag} />
               </a>
             </Link>
           ))}
         </Grid>
-        <Link href="/collections/loot">
+        <Link href="/collections/boredapeyachtclub">
           <a>
             <P mt={3}>See All</P>
           </a>

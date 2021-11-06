@@ -101,6 +101,7 @@ class Eth {
     });
 
     provider.on("chainChanged", async chainId => {
+      alert("hi");
       window.location.reload();
     });
   }

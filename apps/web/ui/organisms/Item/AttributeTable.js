@@ -32,43 +32,6 @@ const LootAttributeTable = ({
           </Flex>
         </Flex>
 
-        <Flex
-          py={3}
-          px={[3, 3, 4]}
-          alignItems="ceter"
-          borderTop="1px solid rgba(255,255,255,0.1)"
-        >
-          <Box flex={1}>
-            <P fontSize={14} color="rgba(255,255,255, 0.8)" mr={3}></P>
-            <P color="white" fontSize={16} fontWeight={600}>
-              {bag.name}
-            </P>
-          </Box>
-          <Flex alignItems="center">
-            {showRarity && (
-              <>
-                <P
-                  color="rgba(255,255,255,0.9)"
-                  display={["none", "none", "block", "block"]}
-                >
-                  {rarityDescription(lootRarity(attributes.map(a => a.value)))}
-                </P>
-                <Box
-                  width={12}
-                  height={12}
-                  borderRadius="50%"
-                  ml={2}
-                  bg={rarityColor(lootRarity(attributes.map(a => a.value)))}
-                />
-              </>
-            )}
-            {showGreatness && (
-              <P width={column} textAlign="right">
-                {metaData ? metaData.scores.greatness : 0}
-              </P>
-            )}
-          </Flex>
-        </Flex>
         {attributes.map(item => (
           <Flex
             key={item.value}

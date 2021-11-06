@@ -5,10 +5,11 @@ const theme = {
     textPrimary: "white",
     textSecondary: "rgba(255, 255, 255, 0.8)",
     borderColor: "rgba(255,255,255,0.1)",
-    borderColorAlt: "rgba(255,255,255,0.2)"
+    borderColorAlt: "rgba(255,255,255,0.2)",
+    primary: "#bfc500"
   },
   fonts: {
-    body: "Source Code Pro",
+    body: "Montserrat",
     heading: "Serif"
   },
 

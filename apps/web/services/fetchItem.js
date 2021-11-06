@@ -7,6 +7,7 @@ const formatToken = token => {
 
   return {
     ...token,
+    name: token.name || "#" + id,
     isForSale: !!token.floor_price,
     price: token.floor_price ? gweiToEth(token.floor_price) : 0,
     image: token.image,
@@ -26,8 +27,10 @@ const fetchItem = async (collection, id) => {
     ...data.token,
     source:
       orders &&
-      orders[0] &&
-      orders[0].feeRecipient === "0x5b3256965e7c3cf26e11fcaf296dfc8807c01073"
+      orders.orders.length &&
+      orders.orders[0] &&
+      orders.orders[0].custom_data.feeRecipient ==
+        "0x5b3256965e7c3cf26e11fcaf296dfc8807c01073"
         ? "OpenSea"
         : "LootExchange",
     owner: owners.owners[0].owner,

@@ -16,7 +16,7 @@ const CollectionStats = ({ total = 7800, floor, ...props }) => (
       {...props.sx}
     >
       <Box p={2} px={4} textAlign="center" borderRight="1px solid black">
-        <Leadin>Bags</Leadin>
+        <Leadin>Items</Leadin>
         <P>{abbreviateNumber(total)}</P>
       </Box>
       <Box p={2} px={4} textAlign="center">

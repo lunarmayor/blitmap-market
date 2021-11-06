@@ -35,11 +35,10 @@ const ItemWrapper = styled(Box)`
 `;
 
 const routeMap = {
-  loot: "collections/loot",
-  genesis: "collections/genesisadventurer",
-  mLoot: "collections/more-loot",
-  address: "adventurers",
-  item: "items"
+  mutant: "collections/0x60e4d786628fea6478f785a6d7e704777c86a7c6",
+  ape: "collections/0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d",
+  dog: "collections/0xba30e5f9bb24caa003e9f2f0497ad287fdf95623",
+  address: "owners"
 };
 
 const SearchResults = ({ results, handleSelection }) => {
@@ -75,22 +74,39 @@ const GlobalSearch = props => {
   const handleSearch = async () => {
     let bagNum = parseInt(debouncedQuery);
 
-    if (bagNum && bagNum > 0 && bagNum < 8001) {
-      let genesis = {
-        type: "genesis",
-        label: "Genesis Adventurer #" + bagNum,
+    let ape = null;
+    let mutant = null;
+    let dog = null;
+
+    if (bagNum >= 0 && bagNum < 10001) {
+      ape = {
+        type: "ape",
+        label: "Ape #" + bagNum,
         id: bagNum
       };
-
-      return setResults([
-        { type: "loot", label: "Loot Bag #" + bagNum, id: bagNum },
-        ...(bagNum > 2540 ? [] : [genesis])
-      ]);
     }
 
-    if (bagNum && bagNum >= 8001 && bagNum < 124411) {
+    if (bagNum >= 0 && bagNum < 16801) {
+      mutant = {
+        type: "mutant",
+        label: "Mutant Ape #" + bagNum,
+        id: bagNum
+      };
+    }
+
+    if (bagNum >= 0 && bagNum < 9801) {
+      dog = {
+        type: "dog",
+        label: "Companion #" + bagNum,
+        id: bagNum
+      };
+    }
+
+    if (bagNum >= 0 && bagNum < 16801) {
       return setResults([
-        { type: "mLoot", label: "mLoot Bag #" + bagNum, id: bagNum }
+        ...(ape && [ape]),
+        ...(mutant && [mutant]),
+        ...(dog && [dog])
       ]);
     }
 
@@ -158,7 +174,7 @@ const GlobalSearch = props => {
           borderBottomLeftRadius: results.length ? 0 : 10
         }}
         value={query}
-        placeholder="Search by bag #, address, or ens"
+        placeholder="Search by token id, address, or ens"
         onChange={e => setQuery(e.target.value)}
         onKeyDown={handleKeyDown}
       />

@@ -5,7 +5,7 @@ import MLootItem from "@ui/organisms/NFTs/mLoot";
 import LootItem from "@ui/organisms/NFTs/Loot";
 import { gweiToEth } from "@utils";
 
-const customCollectionData = {
+export const customCollectionData = {
   // genesis
   genesisadventurer: {
     cover:
@@ -62,6 +62,69 @@ const customCollectionData = {
         process.env.NEXT_PUBLIC_CHAIN_ID == 4
           ? "0x8e71a0d2CC9c48173D9a9b7d90D6036093212aFa"
           : "0x8cFDF9E9f7EA8c0871025318407A6f1Fbc5d5a18"
+    },
+    discord: "https://discord.com/invite/KuYyKXam9G",
+    twitter: "https://twitter.com/lootproject",
+    home: "https://lootproject.com",
+    etherscan:
+      "https://etherscan.io/address/0xff9c1b15b16263c61d017ee9f65c50e4ae0113d7"
+  },
+
+  // Loot
+  boredapeyachtclub: {
+    image: "/byaclogotransparent.png",
+    cover:
+      "https://lh3.googleusercontent.com/i5dYZRkVCUK97bfprQ3WXyrT9BnLSZtVKGJlKQ919uaUB0sxbngVCioaiyu9r6snqfi2aaTyIvv6DHm4m2R3y7hMajbsv14pSZK8mhs=h600",
+    royalty: 0.025,
+
+    royaltyRecipient: {
+      name: "Bored Ape Creators"
+    },
+    discord: "https://discord.com/invite/KuYyKXam9G",
+    twitter: "https://twitter.com/lootproject",
+    home: "https://lootproject.com",
+    etherscan:
+      "https://etherscan.io/address/0xff9c1b15b16263c61d017ee9f65c50e4ae0113d7"
+  },
+  // Loot
+  "mutant-ape-yacht-club": {
+    //image: "/byaclogotransparent.png",
+    cover:
+      "https://lh3.googleusercontent.com/i5dYZRkVCUK97bfprQ3WXyrT9BnLSZtVKGJlKQ919uaUB0sxbngVCioaiyu9r6snqfi2aaTyIvv6DHm4m2R3y7hMajbsv14pSZK8mhs=h600",
+    royalty: 0.025,
+
+    royaltyRecipient: {
+      name: "Bored Ape Creators"
+    },
+    discord: "https://discord.com/invite/KuYyKXam9G",
+    twitter: "https://twitter.com/lootproject",
+    home: "https://lootproject.com",
+    etherscan:
+      "https://etherscan.io/address/0xff9c1b15b16263c61d017ee9f65c50e4ae0113d7"
+  },
+  "bored-ape-kennel-club": {
+    //image: "/byaclogotransparent.png",
+    cover:
+      "https://lh3.googleusercontent.com/i5dYZRkVCUK97bfprQ3WXyrT9BnLSZtVKGJlKQ919uaUB0sxbngVCioaiyu9r6snqfi2aaTyIvv6DHm4m2R3y7hMajbsv14pSZK8mhs=h600",
+    royalty: 0.025,
+
+    royaltyRecipient: {
+      name: "Bored Ape Creators"
+    },
+    discord: "https://discord.com/invite/KuYyKXam9G",
+    twitter: "https://twitter.com/lootproject",
+    home: "https://lootproject.com",
+    etherscan:
+      "https://etherscan.io/address/0xff9c1b15b16263c61d017ee9f65c50e4ae0113d7"
+  },
+  "bored-ape-chemistry-club": {
+    //image: "/byaclogotransparent.png",
+    cover:
+      "https://lh3.googleusercontent.com/i5dYZRkVCUK97bfprQ3WXyrT9BnLSZtVKGJlKQ919uaUB0sxbngVCioaiyu9r6snqfi2aaTyIvv6DHm4m2R3y7hMajbsv14pSZK8mhs=h600",
+    royalty: 0.025,
+
+    royaltyRecipient: {
+      name: "Bored Ape Creators"
     },
     discord: "https://discord.com/invite/KuYyKXam9G",
     twitter: "https://twitter.com/lootproject",

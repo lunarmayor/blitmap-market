@@ -9,16 +9,17 @@ import eth from "../../../ethers";
 import ether from "../../../public/ether.png";
 
 const Container = ({ ...props }) => (
-  <Box p={[3, 3, 4]} pt={[0, 0, 0]} bg="rgb(37 34 47)" {...props} />
+  <Box p={[3, 3, 4]} pt={[0, 0, 0]} {...props} />
 );
 
 const BuyButton = styled(Button)`
   transition: background-color 300ms ease-in-out, color 250ms ease-in-out;
-  background: rgb(41 63 215);
+  background: #bfc500;
+  text-transform: uppercase;
+  color: black;
 
   &:hover {
-    background: rgb(61 83 235);
-    color: white;
+    background: white;
   }
 `;
 
@@ -44,7 +45,7 @@ const PriceBox = ({ item, owner, collection = {} }) => {
     return null;
   }
 
-  let collectionId = collection ? collection.id : 0;
+  let collectionId = item.contract;
 
   const getCallToAction = () => {
     if (!isOwn && isForSale) {
@@ -139,21 +140,13 @@ const PriceBox = ({ item, owner, collection = {} }) => {
 };
 
 const BuyBox = ({ item, owner, collection }) => (
-  <Pane
-    mb={4}
-    display="flex"
-    flexDirection="column"
-    bg={item.isForSale || owner.isOwnItem ? "rgb(37 34 47)" : "rgb(22 22 22)"}
-  >
+  <Pane mb={4} display="flex" flexDirection="column" bg={"rgb(22 22 22)"}>
     <Box p={[3, 3, 4]} flex={1} position="relative">
       <Flex justifyContent="space-between">
         <H2 mb={2}>{item.name}</H2>
-        {item.source && (
-          <Source source={item.source} size={30} alignItem="flex-start" />
-        )}
       </Flex>
 
-      <Link href={`/adventurers/${item.owner}`}>
+      <Link href={`/owners/${item.owner}`}>
         <a>
           <Owner
             large

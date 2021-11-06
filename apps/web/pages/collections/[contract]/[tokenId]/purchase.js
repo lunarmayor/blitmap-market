@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 import useItem from "@hooks/useItem";
 import useCurrentUser from "@hooks/useCurrentUser";
 import useContractName from "@hooks/useContractName";
-import useCollection from "@hooks/useCollection";
+import useCollection, { customCollectionData } from "@hooks/useCollection";
 import Tilt from "react-parallax-tilt";
 import { Builders, Helpers } from "@lootexchange/sdk";
 
@@ -40,16 +40,15 @@ import moment from "moment";
 
 // need to just make this style the actual button
 const BuyButton = styled(Button)`
-  color: white;
   transition: background-color 300ms ease-in-out, color 250ms ease-in-out;
-  background: rgb(41 63 215);
+  background: #bfc500;
+  text-transform: uppercase;
+  color: black;
 
   &:hover {
-    background: rgb(61 83 235);
-    color: white;
+    background: white;
   }
 `;
-
 const CancelButton = styled(Button)`
   background: none;
   color: white;
@@ -89,8 +88,8 @@ export const ItemCard = ({ bag, price, exchangeRate, collection }) => (
       />
     </Pane>
     <Box flex={1}>
-      <P my={2} color="#b1b1ff" fontSize={12}>
-        {collection && collection.name}
+      <P my={2} color="primary" fontSize={12}>
+        {bag && bag.collection_name}
       </P>
       <P>{bag.name}</P>
       <Owner
@@ -128,8 +127,9 @@ const getPayout = baseOrder => {
   };
 };
 
-const ReviewStep = ({ bag, exchangeRate, collection }) => {
+const ReviewStep = ({ bag, exchangeRate }) => {
   let { seller, royalty, marketPlace } = getPayout(bag.sellOrder);
+  const collection = customCollectionData[bag.collection];
   return (
     <>
       <ItemCard bag={bag} price={bag.price} exchangeRate={exchangeRate} />
@@ -168,7 +168,7 @@ const ReviewStep = ({ bag, exchangeRate, collection }) => {
                 target="_blank"
                 rel="noreferrer"
               >
-                <P mt={1} fontSize={16} color="rgba(100,100,150)">
+                <P mt={1} fontSize={16} color="primary">
                   read more
                 </P>
               </a>
@@ -266,12 +266,10 @@ const STEPS = {
 };
 
 const Purchase = () => {
-  const { contract, collection: c, readableName } = useContractName();
-  const collection = useCollection(c);
   const router = useRouter();
   const currentUser = useCurrentUser();
   const [step, setStep] = useState(STEPS.review);
-  const { tokenId: id } = router.query;
+  const { tokenId: id, contract } = router.query;
   let { item: itemData, owner } = useItem(contract, id);
   let bag = { ...itemData, ...owner };
 
@@ -334,10 +332,7 @@ const Purchase = () => {
         <Box p={3} position="absolute" top={0}>
           <Link href="/">
             <a>
-              <Logo
-                width={Math.floor(257 / 2.3)}
-                height={Math.floor(98 / 2.3)}
-              />
+              <img src="/byaclogotransparent.png" width={55} />
             </a>
           </Link>
         </Box>
@@ -356,7 +351,7 @@ const Purchase = () => {
               glareMaxOpacity={0.35}
               scale={1.02}
             >
-              <Box bg="black" p={10}>
+              <Box bg="backgroundSecondary">
                 <img
                   src={bag.image}
                   style={{
@@ -387,7 +382,7 @@ const Purchase = () => {
       >
         <Flex justifyContent="space-between" mb={4}>
           <H2 fontSize={16}>Checkout</H2>
-          <Link href={`/collections/${bag.collection}/${bag && bag.id}`}>
+          <Link href={`/collections/${bag.contract}/${bag && bag.id}`}>
             <a>
               <FaTimes />
             </a>
@@ -395,35 +390,19 @@ const Purchase = () => {
         </Flex>
         <Box flex={1} overflow="auto" pb={4}>
           {bag &&
-            collection &&
+            bag.collection &&
             {
               [STEPS.review]: (
-                <ReviewStep
-                  bag={bag}
-                  exchangeRate={exchangeRate}
-                  collection={collection}
-                />
+                <ReviewStep bag={bag} exchangeRate={exchangeRate} />
               ),
               [STEPS.waitingForConfirmation]: (
-                <WaitingForConfirmation
-                  bag={bag}
-                  exchangeRate={exchangeRate}
-                  collection={collection}
-                />
+                <WaitingForConfirmation bag={bag} exchangeRate={exchangeRate} />
               ),
               [STEPS.waitingforTransaction]: (
-                <WaitingforTransaction
-                  bag={bag}
-                  exchangeRate={exchangeRate}
-                  collection={collection}
-                />
+                <WaitingforTransaction bag={bag} exchangeRate={exchangeRate} />
               ),
               [STEPS.completed]: (
-                <Confirmed
-                  bag={bag}
-                  exchangeRate={exchangeRate}
-                  collection={collection}
-                />
+                <Confirmed bag={bag} exchangeRate={exchangeRate} />
               )
             }[step]}
         </Box>

@@ -6,15 +6,9 @@ const useAddressTokens = address => {
   const [tokens, setTokens] = useState([]);
   useEffect(() => {
     const getTokens = async () => {
-      let [loot, mLoot, genesis] = await Promise.all([
-        api(address, "tokens" + "?collection_id=loot", "users"),
-        api(address, "tokens" + "?collection_id=more-loot", "users"),
-        api(address, "tokens" + "?collection_id=genesisadventurer", "users")
-      ]);
+      let result = await api(address, "tokens", "users");
 
-      setTokens(
-        [...loot.tokens, ...mLoot.tokens, ...genesis.tokens].map(formatToken)
-      );
+      setTokens(result.tokens.map(formatToken));
     };
 
     if (address) {

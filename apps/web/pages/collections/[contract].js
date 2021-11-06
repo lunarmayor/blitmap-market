@@ -21,6 +21,7 @@ import CollectionStats from "@ui/organisms/CollectionStats";
 import ItemSelector from "@ui/organisms/ItemSelector";
 import NFT from "@ui/organisms/GenericNFT";
 import LootNFT from "@ui/organisms/NFTs/Loot";
+import FilterBar from "@ui/organisms/FilterBar";
 
 import { useRouter } from "next/router";
 import loot from "../../public/community.png";
@@ -80,7 +81,7 @@ const Collection = () => {
     item
   });
 
-  let ItemGrid = collection && collection.loot ? Grid : GenericGrid;
+  let ItemGrid = Grid;
   let Item = collection ? collection.Item || NFT : NFT;
 
   const [sentryRef] = useInfiniteScroll({
@@ -233,39 +234,17 @@ const Collection = () => {
             icon={<FaSort color="rgba(255,255,255,0.9)" />}
           >
             <option value="Price">Price</option>
-            <option value="Greatness">Greatness</option>
-          </Select>
-          {collection && collection.hasItemSearch && (
-            <ItemSelector
-              item={item}
-              onChange={newItem => setItem(newItem)}
-              display={["none", "block", "block", "block"]}
-            />
-          )}
-        </Flex>
-        <Flex>
-          <Select
-            display={["none", "none", "block", "block"]}
-            onChange={e => setLens(e.target.value)}
-            icon={<FaEye color="rgba(255,255,255,0.9)" />}
-          >
-            <option value="characters">Character</option>
-            <option disabled value="hyper">
-              Hyperloot
-            </option>
-
-            <option disabled value="swag">
-              Loot Swag
-            </option>
+            <option value="">Price High</option>
           </Select>
         </Flex>
+        <FilterBar id={c} onChange={i => alert(i)} />
       </Flex>
       <Box p={3} pt={0} minHeight="calc(100vh - 82px)" id="items">
         <ItemGrid>
           {collection &&
             items.map(item => (
               <Link
-                href={`/collections/${readableName}/${item.id}`}
+                href={`/collections/${item.contract}/${item.id}`}
                 key={item.id}
               >
                 <a>

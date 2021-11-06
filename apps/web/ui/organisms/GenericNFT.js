@@ -48,9 +48,9 @@ const NFT = ({ item, noData, ...props }) => {
         />
       </NftContainer>
       {!noData && (
-        <Box p={3} style={{ borderTop: "2px solid rgba(255, 255, 255, 0.1)" }}>
+        <Box p={3}>
           <Flex justifyContent="space-between" alignItems="center">
-            <P flex={1}>{item.name}</P>
+            <P flex={1}>{item.name || "#" + item.id}</P>
 
             <Flex alignItems="center" justifyContent="center">
               {item.source && (

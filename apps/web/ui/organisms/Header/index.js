@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Flex, Box, H1, P, Logo, Image, Button } from "@ui";
 import useCurrentUser from "@hooks/useCurrentUser";
+import useCollections from "@hooks/useCollections";
 import Link from "next/link";
 import { FaBars, FaCaretDown } from "react-icons/fa";
 
@@ -10,30 +11,22 @@ import Sidebar from "./Sidebar";
 import NavDropdown from "../NavDropdown";
 
 export const NavItem = ({ ...props }) => (
-  <P color="textSecondary" fontWeight={600} fontSize={2} {...props} />
+  <P color="textSecondary" fontWeight={500} fontSize={2} {...props} />
 );
-
-const collections = [
-  {
-    label: "Loot",
-    href: "/collections/loot",
-    image: "/lootCollectionLogo-small.png"
-  },
-  {
-    label: "mLoot",
-    href: "/collections/more-loot",
-    image: "/mLootCollectionLogo-small.png"
-  },
-  {
-    label: "Genesis",
-    href: "/collections/genesisadventurer",
-    image: "/genesisCollectionLogo-small.png"
-  }
-];
 
 const Header = () => {
   const currentUser = useCurrentUser();
   const [open, setOpen] = useState(false);
+  const collectionResult = useCollections();
+  const collections = collectionResult
+    ? collectionResult.map(collection => {
+        return {
+          href: `/collections/${collection.id}`,
+          label: collection.name,
+          image: collection.image
+        };
+      })
+    : [];
 
   return (
     <Flex
@@ -50,7 +43,7 @@ const Header = () => {
       />
       <Link href="/">
         <a>
-          <Logo width={257 / 2.5} height={98 / 2.5} />
+          <Logo width={55} height={55} />
         </a>
       </Link>
       <Box display={["flex", "flex", "none", "none"]}>
@@ -102,9 +95,9 @@ const Header = () => {
         </Flex>
         {currentUser && (
           <Flex mr={4}>
-            <Link href={`/adventurers/${currentUser.address}`}>
+            <Link href={`/owners/${currentUser.address}`}>
               <a>
-                <NavItem>Inventory</NavItem>
+                <NavItem>My Room</NavItem>
               </a>
             </Link>
           </Flex>
