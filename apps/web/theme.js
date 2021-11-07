@@ -6,10 +6,10 @@ const theme = {
     textSecondary: "rgba(255, 255, 255, 0.8)",
     borderColor: "rgba(255,255,255,0.1)",
     borderColorAlt: "rgba(255,255,255,0.2)",
-    primary: "#bfc500"
+    primary: "rgba(127, 255, 168, 1)"
   },
   fonts: {
-    body: "Montserrat",
+    body: "Josefin Sans",
     heading: "Serif"
   },
 

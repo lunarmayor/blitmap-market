@@ -286,9 +286,12 @@ export default function ListingModal({
         });
         sellOrder = await Helpers.Order.sign(signer, sellOrder);
 
-        await axios.post(`https://reservoir-core-production.up.railway.app/orders/wyvern-v2`, {
-          orders: [sellOrder] 
-        });
+        await axios.post(
+          `https://reservoir-core-production.up.railway.app/orders/wyvern-v2`,
+          {
+            orders: [sellOrder]
+          }
+        );
 
         // Set success
         setStep3({
@@ -334,7 +337,7 @@ export default function ListingModal({
 
   return (
     <>
-      <div onClick={openModal}>List on Loot Exchange</div>
+      <div onClick={openModal}>List on the Blitmap Market</div>
 
       <Transition
         className="fixed inset-0 z-10 overflow-y-auto backdrop-blur"

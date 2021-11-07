@@ -5,7 +5,7 @@ import api from "@api";
 import { sort } from "fast-sort";
 
 const useAttributes = id => {
-  const [attributes, setAttributes] = useState(null);
+  const [attributes, setAttributes] = useState([]);
 
   useEffect(() => {
     const fetchAttributes = async () => {

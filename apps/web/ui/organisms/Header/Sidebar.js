@@ -104,7 +104,7 @@ const Sidebar = ({ open, onClose, collections }) => {
             <Flex mt={4}>
               <Link href={`/owners/${currentUser.address}`}>
                 <a>
-                  <NavItem>My Room</NavItem>
+                  <NavItem>Inventory</NavItem>
                 </a>
               </Link>
             </Flex>

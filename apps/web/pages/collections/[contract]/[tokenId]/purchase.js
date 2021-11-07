@@ -41,12 +41,11 @@ import moment from "moment";
 // need to just make this style the actual button
 const BuyButton = styled(Button)`
   transition: background-color 300ms ease-in-out, color 250ms ease-in-out;
-  background: #bfc500;
-  text-transform: uppercase;
+  background: rgba(127, 255, 168, 1);
   color: black;
 
   &:hover {
-    background: white;
+    background: rgba(127, 255, 168, 0.8);
   }
 `;
 const CancelButton = styled(Button)`
@@ -155,31 +154,33 @@ const ReviewStep = ({ bag, exchangeRate }) => {
         />
       </Flex>
 
-      <Flex mb={4}>
-        <Box flex={1}>
-          <H3 color="rgba(255,255,255,0.7)">
-            {collection.royaltyRecipient.name}
-          </H3>
-          <Flex mt={3} justifyContent="space-between">
-            <Box maxWidth={350} mr={3} flex={1}>
-              <P fontSize={14}>{collection.royaltyRecipient.description}</P>
-              <a
-                href={collection.royaltyRecipient.link}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <P mt={1} fontSize={16} color="primary">
-                  read more
-                </P>
-              </a>
-            </Box>
-          </Flex>
-        </Box>
-        <Price
-          cost={shortenNumber(bag.price * royalty)}
-          sub={royalty * 100 + "%"}
-        />
-      </Flex>
+      {!!royalty && (
+        <Flex mb={4}>
+          <Box flex={1}>
+            <H3 color="rgba(255,255,255,0.7)">
+              {collection.royaltyRecipient.name}
+            </H3>
+            <Flex mt={3} justifyContent="space-between">
+              <Box maxWidth={350} mr={3} flex={1}>
+                <P fontSize={14}>{collection.royaltyRecipient.description}</P>
+                <a
+                  href={collection.royaltyRecipient.link}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <P mt={1} fontSize={16} color="primary">
+                    read more
+                  </P>
+                </a>
+              </Box>
+            </Flex>
+          </Box>
+          <Price
+            cost={shortenNumber(bag.price * royalty)}
+            sub={royalty * 100 + "%"}
+          />
+        </Flex>
+      )}
 
       <Flex>
         <Box flex={1}>
@@ -332,7 +333,7 @@ const Purchase = () => {
         <Box p={3} position="absolute" top={0}>
           <Link href="/">
             <a>
-              <img src="/byaclogotransparent.png" width={55} />
+              <Logo width={40} height={40} />
             </a>
           </Link>
         </Box>

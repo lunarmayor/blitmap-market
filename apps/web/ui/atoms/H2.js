@@ -6,11 +6,7 @@ const H2 = ({ ...props }) => (
     color="white"
     fontSize={["28px", "32px"]}
     fontFamily="body"
-    fontWeight={900}
-    fontStyle={"italic"}
-    sx={{
-      textTransform: "uppercase"
-    }}
+    fontWeight={600}
     {...props}
   />
 );

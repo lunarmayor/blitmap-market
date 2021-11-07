@@ -18,6 +18,13 @@ export const formatToken = token => {
 const removeEmpty = obj =>
   Object.fromEntries(Object.entries(obj).filter(([_, v]) => v != null));
 
+const renameFilters = (filters = {}) =>
+  Object.fromEntries(
+    Object.entries(filters)
+      .filter(([_, v]) => !!v)
+      .map(([key, value]) => [`_${key}`, value])
+  );
+
 const fetchBags = async ({
   offset = 0,
   collection,
@@ -35,9 +42,7 @@ const fetchBags = async ({
       limit: limit,
       sort_by: sort == "Greatness" ? "_Greatness" : null,
       sort_direction: sort === "Greatness" ? "desc" : "asc",
-      ...(item && {
-        [`_${item.key}`]: item.value
-      })
+      ...renameFilters(filter)
     })
   ).toString();
 

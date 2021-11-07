@@ -131,6 +131,37 @@ export const customCollectionData = {
     home: "https://lootproject.com",
     etherscan:
       "https://etherscan.io/address/0xff9c1b15b16263c61d017ee9f65c50e4ae0113d7"
+  },
+  blitmap: {
+    cover:
+      "https://lh3.googleusercontent.com/Q_Yb9MG3cNPelLduHcoQ0G5_6YESh_HjZfVUBeritA3Daj0nYR-kulNhqPcH-I2R8FGTg22e-DJbSuAuQ9G6HWa92RPYCNHyNaRL=h400",
+
+    discord: "https://discord.com/invite/KuYyKXam9G",
+    twitter: "https://twitter.com/lootproject",
+    home: "https://blitmap.com",
+    etherscan:
+      "https://etherscan.io/address/0xff9c1b15b16263c61d017ee9f65c50e4ae0113d7",
+    royalty: 0,
+
+    royaltyRecipient: {
+      name: ""
+    }
+  },
+
+  "the-blitnauts": {
+    cover: "/blitnautbackground.png",
+    image: "/blitnaut-small.png",
+
+    discord: "https://discord.com/invite/KuYyKXam9G",
+    twitter: "https://twitter.com/lootproject",
+    home: "https://blitmap.com",
+    etherscan:
+      "https://etherscan.io/address/0xff9c1b15b16263c61d017ee9f65c50e4ae0113d7",
+    royalty: 0,
+
+    royaltyRecipient: {
+      name: ""
+    }
   }
 };
 

@@ -40,6 +40,9 @@ import { formatMoney, shortenNumber } from "@utils";
 import { useEtherBalance } from "@usedapp/core";
 import useCollection from "@hooks/useCollection";
 
+import dynamic from "next/dynamic";
+import { StarField } from "starfield-react";
+
 import { nameToContractMap } from "@hooks/useContractName";
 
 import useItems from "../hooks/useItems";
@@ -147,22 +150,52 @@ const Home = () => {
   const [isSticky, setIsSticky] = useState(false);
   const itemsRef = useRef(null);
   const exchangeRate = useExchangeRate();
-  const treasury = useEtherBalance(
-    "0x8cFDF9E9f7EA8c0871025318407A6f1Fbc5d5a18"
-  );
+  //  const treasury = useEtherBalance(
+  //   "0x8cFDF9E9f7EA8c0871025318407A6f1Fbc5d5a18"
+  //);
+  const treasury = "0";
 
   const [item, setItem] = useState(null);
   const { items, loading, fetchMore, moreLeft } = useItems({
-    collection: "boredapeyachtclub"
+    collection: "blitmap"
   });
-  const collection = useCollection("boredapeyachtclub");
+  const collection = useCollection("blitmap");
 
   return (
     <Flex flex={1} flexDirection="column" bg="background">
       <Header />
       <Box position="relative">
+        <Box
+          position="absolute"
+          top={0}
+          bottom={0}
+          right={0}
+          left="0"
+          overflow="hidden"
+        >
+          <StarField
+            starSize={2}
+            starRatio={1000}
+            width={2500}
+            fps={60}
+            speed={1}
+            starStyle={() => {
+              if (Math.random() > 0.5) {
+                return "rgba(127, 255, 168, 0.8)";
+              }
+              return "rgba(255, 255, 255, 0.8)";
+            }}
+            noBackground={true}
+            style={{
+              position: "absolute",
+              top: 0,
+              bottom: 0,
+              left: "50%",
+              transform: "translateX(-50%)"
+            }}
+          />
+        </Box>
         <Flex
-          bg="primary"
           p={4}
           pt={[4, 5]}
           pb={"100px"}
@@ -173,36 +206,32 @@ const Home = () => {
             <Flex>
               <img
                 style={{
-                  backgroundColor: "rgba(0,0,0,0.05)",
-                  padding: 8,
-                  borderRadius: "50%"
+                  marginLeft: -10,
+                  marginTop: -10,
+                  width: 100,
+                  height: 100
+                  //backgroundColor: "rgba(0,0,0,0.05)"
                 }}
-                src="/byaclogotransparent.png"
-                width={100}
+                src="/blitmap-logo.png"
               />
               <H1
                 ml={4}
                 fontFamily="body"
-                fontSize={[16, 32]}
+                fontSize={[30, 32]}
                 fontWeight={900}
                 maxWidth="640px"
-                color="black"
-                sx={{
-                  fontStyle: "italic",
-                  textTransform: "uppercase"
-                }}
               >
                 Welcome to the <br />
-                Ape Exchange
+                Blitmap Market
               </H1>
             </Flex>
             <P
               mt={3}
-              fontSize={[14, 18]}
-              color="rgba(0,0,0,0.8)"
+              fontSize={[16, 18]}
+              color="rgba(255,255,255,0.8)"
               maxWidth="640px"
             >
-              A BAYC community marketplace with 0% marketplace fees and
+              A blimap community marketplace with 0% marketplace fees and
               community royalties. Join the club.
             </P>
           </Box>
@@ -221,12 +250,7 @@ const Home = () => {
             <Pane bg="black">
               <a href="https://www.royaltydao.com/">
                 <Box p={3}>
-                  <P
-                    fontWeight={900}
-                    fontStyle={"italic"}
-                    mb={1}
-                    color="textSecondary"
-                  >
+                  <P mb={1} color="textSecondary">
                     Treasury
                   </P>
                   <Stat>
@@ -235,7 +259,7 @@ const Home = () => {
                       ? shortenNumber(Number(formatEther(treasury || 0)))
                       : 0}
                   </Stat>
-                  <P mt={-1} color="primary">
+                  <P color="primary">
                     {treasury
                       ? formatMoney(formatEther(treasury) * exchangeRate)
                       : 0}
@@ -246,16 +270,11 @@ const Home = () => {
             <Pane bg="black" display={["none", "none", "block", "block"]}>
               <a href="https://www.royaltydao.com/">
                 <Box p={3}>
-                  <P
-                    fontWeight={900}
-                    fontStyle={"italic"}
-                    mb={1}
-                    color="textSecondary"
-                  >
+                  <P mb={1} color="textSecondary">
                     Open Proposals
                   </P>
                   <Stat>0</Stat>
-                  <P mt={-1} color="primary">
+                  <P color="primary" lineHeight={1}>
                     0 closed
                   </P>
                 </Box>
@@ -265,18 +284,13 @@ const Home = () => {
               <Link href="/collections/loot">
                 <a>
                   <Box p={3}>
-                    <P
-                      fontWeight={900}
-                      fontStyle={"italic"}
-                      mb={1}
-                      color="textSecondary"
-                    >
-                      BAYC Floor
+                    <P mb={1} color="textSecondary">
+                      Blitmap Floor
                     </P>
                     <Stat>
                       Ξ{collection ? shortenNumber(collection.floor || 0) : 0}
                     </Stat>
-                    <P mt={-1} color="primary">
+                    <P color="primary">
                       {collection
                         ? formatMoney(collection.floor * exchangeRate)
                         : 0}
@@ -296,58 +310,56 @@ const Home = () => {
         pt={"100px"}
       >
         <H2 my={4} color="textSecondary" fontSize={24}>
-          BAYC Collections
+          Blitmap Collections
         </H2>
         <CollectionGrid>
-          <Link href="/collections/boredapeyachtclub">
+          <Link href="/collections/blitmap">
             <a>
               <CollectionCard
-                image="/apeCollectionImage.png"
+                image="/rose.png"
                 padding
-                name={"Bored Ape Yacht Club"}
-                description="a collection of 10,000 unique Bored Ape NFTs— unique digital collectibles living on the Ethereum blockchain."
+                name={"Blitmap"}
+                description="Blitmap is a community crafted sci-fantasy universe. All data is completely on chain."
               />
             </a>
           </Link>
-          <Link href="/collections/mutant-ape-yacht-club">
+          <Link href="/collections/the-blitnauts">
             <a>
               <CollectionCard
-                image="https://lh3.googleusercontent.com/lHexKRMpw-aoSyB1WdFBff5yfANLReFxHzt1DOj_sg7mS14yARpuvYcUtsyyx-Nkpk6WTcUPFoG53VnLJezYi8hAs0OxNZwlw6Y-dmI=s0"
-                name={"Mutant Ape Yacht Club"}
-                description={
-                  "A collection of up to 20,000 Mutant Apes that can only be created by exposing an existing Bored Ape to a vial of MUTANT SERUM"
-                }
+                image="/blitnaut.png"
+                name={"The Blitnauts"}
+                description="A faction of sentient robots sworn to locate and protect the Blitmaps, and the heroes of our world."
               />
             </a>
           </Link>
-          <Link href="/collections/bored-ape-kennel-club">
-            <a>
-              <CollectionCard
-                image="https://lh3.googleusercontent.com/l1wZXP2hHFUQ3turU5VQ9PpgVVasyQ79-ChvCgjoU5xKkBA50OGoJqKZeMOR-qLrzqwIfd1HpYmiv23JWm0EZ14owiPYaufqzmj1=s0"
-                name={"Bored Ape Kennel Club"}
-                description={
-                  "It gets lonely in the swamp sometimes. That's why every ape should have a four-legged companion."
-                }
-              />
-            </a>
-          </Link>
+
+          <CollectionCard
+            image="/enemies.png"
+            name={"Enemies Expansion"}
+            description={"the Rivals of the Blitnauts"}
+          />
         </CollectionGrid>
       </Flex>
       <Box p={[3, 4]} alignItems="center" flexDirection="column">
         <H2 mb={3} color="textSecondary" fontSize={24}>
-          Entry Apes
+          Entry Blitmaps
         </H2>
 
         <Grid>
-          {items.map(bag => (
-            <Link href={`/collections/${bag.contract}/${bag.id}`} key={bag.id}>
-              <a>
-                <NFT item={bag} />
-              </a>
-            </Link>
-          ))}
+          {items
+            .filter(item => !!item.price)
+            .map(bag => (
+              <Link
+                href={`/collections/${bag.contract}/${bag.id}`}
+                key={bag.id}
+              >
+                <a>
+                  <NFT item={bag} />
+                </a>
+              </Link>
+            ))}
         </Grid>
-        <Link href="/collections/boredapeyachtclub">
+        <Link href="/collections/blitmap">
           <a>
             <P mt={3}>See All</P>
           </a>

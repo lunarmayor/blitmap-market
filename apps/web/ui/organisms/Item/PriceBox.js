@@ -14,12 +14,11 @@ const Container = ({ ...props }) => (
 
 const BuyButton = styled(Button)`
   transition: background-color 300ms ease-in-out, color 250ms ease-in-out;
-  background: #bfc500;
-  text-transform: uppercase;
+  background: rgba(127, 255, 168, 1);
   color: black;
 
   &:hover {
-    background: white;
+    background: rgba(147, 255, 180, 1);
   }
 `;
 

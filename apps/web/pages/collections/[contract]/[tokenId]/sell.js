@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 import useItem from "@hooks/useItem";
 import useCurrentUser from "@hooks/useCurrentUser";
 import useContractName from "@hooks/useContractName";
-import useCollection from "@hooks/useCollection";
+import useCollection, { customCollectionData } from "@hooks/useCollection";
 import Tilt from "react-parallax-tilt";
 
 import {
@@ -43,15 +43,13 @@ import ListingModal from "@ui/organisms/ListingModal";
 
 // need to just make this style the actual button
 const BuyButton = styled(Button)`
-  color: white;
   transition: background-color 300ms ease-in-out, color 250ms ease-in-out;
-  background: rgb(41 63 215);
+  background: rgba(127, 255, 168, 1);
+  color: black;
 
   &:hover {
-    background: rgb(61 83 235);
-    color: white;
+    background: rgba(127, 255, 168, 0.8);
   }
-
   ${props =>
     props.disabled &&
     `
@@ -80,7 +78,7 @@ const ReviewStep = ({ bag, listPrice = "0", setListPrice, collection }) => (
     <ItemCard bag={bag} collection={collection} />
 
     <Hr my={4} />
-    <P mb={3}>What do you want to list your bag for?</P>
+    <P mb={3}>What do you want to list your nft for?</P>
     <Box position="relative">
       <Box position="absolute" left="8px" top={12}>
         <Image src={ether} width={48 / 2} height={48 / 2} />
@@ -196,7 +194,7 @@ const Confirmed = ({ bag, transaction, price, exchangeRate, collection }) => (
     />
     <Hr my={4} mb={5} />
     <H2 mb={5} fontSize={30} textAlign="center" px={4}>
-      Congrats. Your bag is listed on Loot Exchange!
+      Congrats. Your bag is listed on the Blitmap Market!
     </H2>
     <Flex justifyContent="center" alignItems="center" flexDirection="column">
       <FaCheckCircle size={100} />
@@ -212,11 +210,10 @@ const STEPS = {
 };
 
 const Purchase = () => {
-  const { contract, collection: c, readableName } = useContractName();
-  const collection = useCollection(c);
   const router = useRouter();
-  const { tokenId: id, initialPrice } = router.query;
+  const { tokenId: id, initialPrice, contract } = router.query;
   const { item: itemData, owner } = useItem(contract, id);
+  const collection = itemData && customCollectionData[itemData.collection];
   const [listPrice, setListPrice] = useState(0);
   const currentUser = useCurrentUser();
   const [step, setStep] = useState(STEPS.review);
@@ -259,10 +256,7 @@ const Purchase = () => {
         <Box p={3} position="absolute" top={0}>
           <Link href="/">
             <a>
-              <Logo
-                width={Math.floor(257 / 2.3)}
-                height={Math.floor(98 / 2.3)}
-              />
+              <Logo width={55} height={55} />
             </a>
           </Link>
         </Box>
@@ -311,9 +305,9 @@ const Purchase = () => {
         p={[3, 3, 4, 4]}
       >
         <Flex justifyContent="space-between" mb={4}>
-          <H2 fontSize={16}>List your bag</H2>
+          <H2 fontSize={16}>List your Item</H2>
 
-          <Link href={`/collections/${bag.collection}/${bag && bag.id}`}>
+          <Link href={`/collections/${contract}/${bag && bag.id}`}>
             <a>
               <FaTimes />
             </a>
@@ -360,9 +354,9 @@ const Purchase = () => {
           )}
         </Flex>
         {step === STEPS.completed ? (
-          <Link href={`/bags/${bag && bag.id}`}>
+          <Link href={`/collections/${contract}/${bag.id}`}>
             <a>
-              <BuyButton>Go to Bag</BuyButton>
+              <BuyButton>Go to Item</BuyButton>
             </a>
           </Link>
         ) : currentUser ? (

@@ -20,20 +20,22 @@ const Select = ({
   ...props
 }) => (
   <Box position="relative" {...props}>
-    <Flex
-      position="absolute"
-      left="16px"
-      top="50%"
-      sx={{
-        transform: "translate(0, -50%)"
-      }}
-    >
-      {icon}
-    </Flex>
+    {icon && (
+      <Flex
+        position="absolute"
+        left="16px"
+        top="50%"
+        sx={{
+          transform: "translate(0, -50%)"
+        }}
+      >
+        {icon}
+      </Flex>
+    )}
     <SystemSelect
       py="14px"
       px="16px"
-      pl="42px"
+      pl={icon ? "42px" : "16px"}
       bg="background"
       color="textPrimary"
       borderRadius="default"
@@ -43,7 +45,8 @@ const Select = ({
       fontSize="14px"
       fontWeight={700}
       style={{
-        WebkitAppearance: "none"
+        WebkitAppearance: "none",
+        maxWidth: 200
       }}
       value={value}
       onChange={onChange}

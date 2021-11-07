@@ -32,7 +32,7 @@ import useInfiniteScroll from "react-infinite-scroll-hook";
 
 import useBagData from "@hooks/useBags";
 
-const IconButton = ({ icon, ...props }) => (
+export const IconButton = ({ icon, ...props }) => (
   <Box
     p={3}
     borderRadius="default"
@@ -70,7 +70,7 @@ const Collection = () => {
   const [lens, setLens] = useState("characters");
   const [isSticky, setIsSticky] = useState(false);
   const itemsRef = useRef(null);
-  const [filter, setFilter] = useState("forSale");
+  const [filter, setFilter] = useState({});
   const [sort, setSort] = useState("Price");
 
   const [item, setItem] = useState(null);
@@ -80,6 +80,10 @@ const Collection = () => {
     filter,
     item
   });
+
+  useEffect(() => {
+    setFilter({});
+  }, [c]);
 
   let ItemGrid = Grid;
   let Item = collection ? collection.Item || NFT : NFT;
@@ -157,7 +161,7 @@ const Collection = () => {
             borderWidth={2}
             borderColor="borderColorAlt"
             overflow="hidden"
-            borderRadius="50%"
+            borderRadius="20px"
             width={100}
             height={100}
           >
@@ -174,8 +178,11 @@ const Collection = () => {
           </Flex>
         </Box>
 
-        {collection && (
-          <Box sx={{ visibility: ["hidden", "unset", "unset", "unset"] }}>
+        <Box
+          minHeight={50}
+          sx={{ visibility: ["hidden", "unset", "unset", "unset"] }}
+        >
+          {collection && (
             <Flex mt={2}>
               {collection.discord && (
                 <a target="_blank" href={collection.discord} rel="noreferrer">
@@ -198,8 +205,8 @@ const Collection = () => {
                 </a>
               )}
             </Flex>
-          </Box>
-        )}
+          )}
+        </Box>
       </Box>
 
       <Flex flexDirection="column" alignItems="center" mb={4}>
@@ -226,18 +233,18 @@ const Collection = () => {
           transition: "border 300ms ease-in-out"
         }}
       >
+        <FilterBar id={c} onChange={setFilter} />
+
         <Flex>
           <Select
-            mr={3}
             display={["none", "none", "block", "block"]}
             onChange={e => setSort(e.target.value)}
             icon={<FaSort color="rgba(255,255,255,0.9)" />}
           >
-            <option value="Price">Price</option>
-            <option value="">Price High</option>
+            <option value="asc">Lowest Price</option>
+            <option value="desc">Highest Price</option>
           </Select>
         </Flex>
-        <FilterBar id={c} onChange={i => alert(i)} />
       </Flex>
       <Box p={3} pt={0} minHeight="calc(100vh - 82px)" id="items">
         <ItemGrid>
