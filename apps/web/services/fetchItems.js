@@ -25,6 +25,21 @@ const renameFilters = (filters = {}) =>
       .map(([key, value]) => [`_${key}`, value])
   );
 
+const sortToParams = {
+  priceLow: {
+    sort_direction: "asc",
+    sort_by: "floor_price"
+  },
+
+  priceHigh: {
+    sort_direction: "desc",
+    sort_by: "floor_price"
+  },
+  tokenId: {
+    sort_direction: "asc",
+    sort_by: "token_id"
+  }
+};
 const fetchBags = async ({
   offset = 0,
   collection,
@@ -40,8 +55,7 @@ const fetchBags = async ({
       owner: owner ? owner.toLowerCase() : null,
       offset: offset * limit,
       limit: limit,
-      sort_by: sort == "Greatness" ? "_Greatness" : null,
-      sort_direction: sort === "Greatness" ? "desc" : "asc",
+      ...sortToParams[sort],
       ...renameFilters(filter)
     })
   ).toString();

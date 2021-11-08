@@ -109,7 +109,7 @@ const StatGrid = styled.div`
   }
 `;
 
-const CollectionCard = ({ image, name, description }) => (
+const CollectionCard = ({ image, name, description, future }) => (
   <Flex
     height={"100%"}
     flexDirection="column"
@@ -133,6 +133,19 @@ const CollectionCard = ({ image, name, description }) => (
           }}
         />
       </Box>
+      {future && (
+        <Box
+          position="absolute"
+          top={10}
+          left={10}
+          p={2}
+          px={3}
+          borderRadius="20px"
+          bg="rgba(0,0,0,0.6)"
+        >
+          <P fontSize={10}>Future Expansion</P>
+        </Box>
+      )}
     </Box>
     <Box bg="rgba(255,255,255,0.05)" p={3} flex={1}>
       <H2 fontSize={20} m={0}>
@@ -332,7 +345,8 @@ const Home = () => {
           <CollectionCard
             image="/enemies.png"
             name={"Enemies Expansion"}
-            description={"the Rivals of the Blitnauts"}
+            future={true}
+            description={"the Rivals of the Blitnauts."}
           />
         </CollectionGrid>
       </Flex>

@@ -241,8 +241,9 @@ const Collection = () => {
             onChange={e => setSort(e.target.value)}
             icon={<FaSort color="rgba(255,255,255,0.9)" />}
           >
-            <option value="asc">Lowest Price</option>
-            <option value="desc">Highest Price</option>
+            <option value="priceLow">Lowest Price</option>
+            <option value="priceHigh">Highest Price</option>
+            <option value="tokenId">Token Id</option>
           </Select>
         </Flex>
       </Flex>
