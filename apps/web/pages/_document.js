@@ -18,9 +18,6 @@ class MyDocument extends Document {
           />
           <link rel="shortcut icon" type="image/svg" href="/exchangeIcon.svg" />
           <meta name="twitter:card" content="summary" />
-          <meta name="twitter:site" content="@blitmap" />
-          <meta name="twitter:creator" content="@blitmap" />
-          <meta property="og:url" content="https://www.loot.exchange/" />
           <meta property="og:title" content="Blitmap Market" />
           <meta
             property="og:description"

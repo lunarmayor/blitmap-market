@@ -6,7 +6,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <AppWrapper>
       <Head>
-        <title>Loot Exchange</title>
+        <title>Blitmap Market</title>
       </Head>
       <Component {...pageProps} />
     </AppWrapper>
