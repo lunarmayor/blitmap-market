@@ -43,7 +43,10 @@ const Adventurer = ({}) => {
             let Item = GenericNFT;
 
             return (
-              <Link href={`/collections/${loot.contract}/${loot.id}`}>
+              <Link
+                key={loot.id}
+                href={`/collections/${loot.contract}/${loot.id}`}
+              >
                 <a>
                   <Item item={loot} />
                 </a>
