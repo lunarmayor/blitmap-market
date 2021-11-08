@@ -248,40 +248,36 @@ const Home = () => {
         >
           <StatGrid>
             <Pane bg="black">
-              <a href="https://www.royaltydao.com/">
-                <Box p={3}>
-                  <P mb={1} color="textSecondary">
-                    Treasury
-                  </P>
-                  <Stat>
-                    Ξ
-                    {treasury
-                      ? shortenNumber(Number(formatEther(treasury || 0)))
-                      : 0}
-                  </Stat>
-                  <P color="primary">
-                    {treasury
-                      ? formatMoney(formatEther(treasury) * exchangeRate)
-                      : 0}
-                  </P>
-                </Box>
-              </a>
+              <Box p={3}>
+                <P mb={1} color="textSecondary">
+                  Treasury
+                </P>
+                <Stat>
+                  Ξ
+                  {treasury
+                    ? shortenNumber(Number(formatEther(treasury || 0)))
+                    : 0}
+                </Stat>
+                <P color="primary">
+                  {treasury
+                    ? formatMoney(formatEther(treasury) * exchangeRate)
+                    : 0}
+                </P>
+              </Box>
             </Pane>
             <Pane bg="black" display={["none", "none", "block", "block"]}>
-              <a href="https://www.royaltydao.com/">
-                <Box p={3}>
-                  <P mb={1} color="textSecondary">
-                    Open Proposals
-                  </P>
-                  <Stat>0</Stat>
-                  <P color="primary" lineHeight={1}>
-                    0 closed
-                  </P>
-                </Box>
-              </a>
+              <Box p={3}>
+                <P mb={1} color="textSecondary">
+                  Open Proposals
+                </P>
+                <Stat>0</Stat>
+                <P color="primary" lineHeight={1}>
+                  0 closed
+                </P>
+              </Box>
             </Pane>
             <Pane bg="black">
-              <Link href="/collections/loot">
+              <Link href="/collections/blitmap">
                 <a>
                   <Box p={3}>
                     <P mb={1} color="textSecondary">

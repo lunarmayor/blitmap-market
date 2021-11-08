@@ -136,11 +136,11 @@ export const customCollectionData = {
     cover:
       "https://lh3.googleusercontent.com/Q_Yb9MG3cNPelLduHcoQ0G5_6YESh_HjZfVUBeritA3Daj0nYR-kulNhqPcH-I2R8FGTg22e-DJbSuAuQ9G6HWa92RPYCNHyNaRL=h400",
 
-    discord: "https://discord.com/invite/KuYyKXam9G",
-    twitter: "https://twitter.com/lootproject",
+    discord: "https://discord.gg/blitmap",
+    twitter: "https://twitter.com/blitmap",
     home: "https://blitmap.com",
     etherscan:
-      "https://etherscan.io/address/0xff9c1b15b16263c61d017ee9f65c50e4ae0113d7",
+      "https://etherscan.io/address/0x8d04a8c79cEB0889Bdd12acdF3Fa9D207eD3Ff63",
     royalty: 0,
 
     royaltyRecipient: {
@@ -152,11 +152,11 @@ export const customCollectionData = {
     cover: "/blitnautbackground.png",
     image: "/blitnaut-small.png",
 
-    discord: "https://discord.com/invite/KuYyKXam9G",
-    twitter: "https://twitter.com/lootproject",
+    discord: "https://discord.gg/blitmap",
+    twitter: "https://twitter.com/blitmap",
     home: "https://blitmap.com",
     etherscan:
-      "https://etherscan.io/address/0xff9c1b15b16263c61d017ee9f65c50e4ae0113d7",
+      "https://etherscan.io/address/0x448f3219cf2a23b0527a7a0158e7264b87f635db",
     royalty: 0,
 
     royaltyRecipient: {

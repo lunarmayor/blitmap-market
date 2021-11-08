@@ -107,11 +107,11 @@ const Collection = () => {
   }, [itemsRef && itemsRef.current]);
 
   useEffect(() => {
-    if (items && items.length && isSticky) {
+    if (items && items.length && isSticky && !loading) {
       const stickyElm = document.querySelector("#items");
       window.scrollTo(0, stickyElm.offsetTop - 83);
     }
-  }, [filter, sort, item]);
+  }, [filter, sort, item, loading]);
 
   return (
     <Flex flex={1} flexDirection="column" bg="background">

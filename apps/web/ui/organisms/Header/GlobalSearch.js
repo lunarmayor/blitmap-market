@@ -35,9 +35,8 @@ const ItemWrapper = styled(Box)`
 `;
 
 const routeMap = {
-  mutant: "collections/0x60e4d786628fea6478f785a6d7e704777c86a7c6",
-  ape: "collections/0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d",
-  dog: "collections/0xba30e5f9bb24caa003e9f2f0497ad287fdf95623",
+  blitmap: "collections/0x8d04a8c79ceb0889bdd12acdf3fa9d207ed3ff63",
+  blitnaut: "collections/0x448f3219cf2a23b0527a7a0158e7264b87f635db",
   address: "owners"
 };
 
@@ -74,40 +73,27 @@ const GlobalSearch = props => {
   const handleSearch = async () => {
     let bagNum = parseInt(debouncedQuery);
 
-    let ape = null;
-    let mutant = null;
-    let dog = null;
+    let blit = null;
+    let naut = null;
 
-    if (bagNum >= 0 && bagNum < 10001) {
-      ape = {
-        type: "ape",
-        label: "Ape #" + bagNum,
+    if (bagNum >= 0 && bagNum < 1701) {
+      blit = {
+        type: "blitmap",
+        label: "Blitmap #" + bagNum,
+        id: bagNum
+      };
+    }
+
+    if (bagNum >= 0 && bagNum < 866) {
+      naut = {
+        type: "blitnaut",
+        label: "Blitnaut #" + bagNum,
         id: bagNum
       };
     }
 
     if (bagNum >= 0 && bagNum < 16801) {
-      mutant = {
-        type: "mutant",
-        label: "Mutant Ape #" + bagNum,
-        id: bagNum
-      };
-    }
-
-    if (bagNum >= 0 && bagNum < 9801) {
-      dog = {
-        type: "dog",
-        label: "Companion #" + bagNum,
-        id: bagNum
-      };
-    }
-
-    if (bagNum >= 0 && bagNum < 16801) {
-      return setResults([
-        ...(ape && [ape]),
-        ...(mutant && [mutant]),
-        ...(dog && [dog])
-      ]);
+      return setResults([...(blit ? [blit] : []), ...(naut ? [naut] : [])]);
     }
 
     if (ethers.utils.isAddress(debouncedQuery)) {
