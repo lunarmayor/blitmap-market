@@ -107,11 +107,13 @@ const Collection = () => {
   }, [itemsRef && itemsRef.current]);
 
   useEffect(() => {
-    if (items && items.length && isSticky && !loading) {
+    if (items && items.length && isSticky) {
       const stickyElm = document.querySelector("#items");
-      window.scrollTo(0, stickyElm.offsetTop - 83);
+      setTimeout(() => {
+        window.scrollTo(0, stickyElm.offsetTop - 83);
+      }, 0);
     }
-  }, [filter, sort, item, loading]);
+  }, [filter, sort, item]);
 
   return (
     <Flex flex={1} flexDirection="column" bg="background">
@@ -247,7 +249,7 @@ const Collection = () => {
           </Select>
         </Flex>
       </Flex>
-      <Box p={3} pt={0} minHeight="calc(100vh - 82px)" id="items">
+      <Box p={3} pt={0} minHeight="calc(100vh - 83px)" id="items">
         <ItemGrid>
           {collection &&
             items.map(item => (
