@@ -244,8 +244,8 @@ const Home = () => {
               color="rgba(255,255,255,0.8)"
               maxWidth="640px"
             >
-              A blimap community marketplace with 0% marketplace fees and
-              community royalties. Join the club.
+              A Blitmap community marketplace with 0% marketplace fees and
+              community royalties. Join the universe.
             </P>
           </Box>
         </Flex>{" "}
