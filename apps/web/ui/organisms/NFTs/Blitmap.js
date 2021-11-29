@@ -134,8 +134,9 @@ const Blitmap = ({ item }) => {
           <Flex>
             {data &&
               data.parents.map(parent => (
-                <Box ml={2}>
+                <Box ml={2} key={parent}>
                   <img
+                    alt="parent"
                     width={30}
                     src={`https://market.blitmap.com/blitmaps-32/${parent}.png`}
                   />
