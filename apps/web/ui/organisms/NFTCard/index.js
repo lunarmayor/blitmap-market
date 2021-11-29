@@ -72,6 +72,7 @@ export const CardFooter = ({ image, name, price, children, ...props }) => (
           src={image}
           style={{
             width: 50,
+            padding: 2,
             height: 50,
             borderBottomLeftRadius: 10
           }}

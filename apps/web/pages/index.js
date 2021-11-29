@@ -32,7 +32,7 @@ import { formatEther } from "@ethersproject/units";
 import Header from "@ui/organisms/Header";
 import CollectionStats from "@ui/organisms/CollectionStats";
 import ItemSelector from "@ui/organisms/ItemSelector";
-import NFT from "@ui/organisms/GenericNFT";
+import NFT from "@ui/organisms/NFTs/Blitmap";
 import loot from "../public/community.png";
 import useInfiniteScroll from "react-infinite-scroll-hook";
 import useExchangeRate from "@hooks/useExchangeRate";
@@ -61,9 +61,7 @@ const IconButton = ({ icon, ...props }) => (
 
 const Stat = styled(H2)`
   font-weight: 600;
-  font-style: unset;
-  color: rgba(255, 255, 255, 0.9);
-  font-family: helvetica neue;
+  line-height: 1;
 `;
 
 const CollectionGrid = styled.div`
@@ -166,13 +164,14 @@ const Home = () => {
   //  const treasury = useEtherBalance(
   //   "0x8cFDF9E9f7EA8c0871025318407A6f1Fbc5d5a18"
   //);
-  const treasury = "0";
 
   const [item, setItem] = useState(null);
   const { items, loading, fetchMore, moreLeft } = useItems({
     collection: "blitmap"
   });
   const collection = useCollection("blitmap");
+  console.log(collection);
+  const blitnauts = useCollection("the-blitnauts");
 
   return (
     <Flex flex={1} flexDirection="column" bg="background">
@@ -261,48 +260,111 @@ const Home = () => {
         >
           <StatGrid>
             <Pane bg="black">
-              <Box p={3}>
-                <P mb={1} color="textSecondary">
-                  Treasury
-                </P>
-                <Stat>
-                  Ξ
-                  {treasury
-                    ? shortenNumber(Number(formatEther(treasury || 0)))
-                    : 0}
-                </Stat>
-                <P color="primary">
-                  {treasury
-                    ? formatMoney(formatEther(treasury) * exchangeRate)
-                    : 0}
-                </P>
-              </Box>
-            </Pane>
-            <Pane bg="black" display={["none", "none", "block", "block"]}>
-              <Box p={3}>
-                <P mb={1} color="textSecondary">
-                  Open Proposals
-                </P>
-                <Stat>0</Stat>
-                <P color="primary" lineHeight={1}>
-                  0 closed
-                </P>
-              </Box>
+              <Link href="/collections/blitmap">
+                <a>
+                  <Box p={3}>
+                    <Flex alignItems="center" mb={3}>
+                      <img
+                        src="/blitmap-logo.png"
+                        style={{
+                          width: 30,
+                          padding: 5,
+                          height: 30,
+                          border: "1px solid rgba(255,255,255,0.3)",
+                          borderRadius: "50%"
+                        }}
+                      />
+                      <P fontSize={14} ml={2}>
+                        Blitmap
+                      </P>
+                    </Flex>
+                    <Flex alignItems="center" mt={2}>
+                      <Box>
+                        <img
+                          src="/ether.png"
+                          style={{ width: 30, marginLeft: -2 }}
+                        />
+                      </Box>
+                      <Stat>
+                        {collection ? shortenNumber(collection.floor || 0) : 0}
+                      </Stat>
+                    </Flex>
+                    <P mb={0} mt={2} color="textSecondary" fontSize={14}>
+                      Entry Price
+                    </P>
+                  </Box>
+                </a>
+              </Link>
             </Pane>
             <Pane bg="black">
               <Link href="/collections/blitmap">
                 <a>
                   <Box p={3}>
-                    <P mb={1} color="textSecondary">
-                      Blitmap Floor
+                    <Flex alignItems="center" mb={3}>
+                      <img
+                        src="/blitmap-logo.png"
+                        style={{
+                          width: 30,
+                          padding: 5,
+                          height: 30,
+                          border: "1px solid rgba(255,255,255,0.3)",
+                          borderRadius: "50%"
+                        }}
+                      />
+                      <P fontSize={14} ml={2}>
+                        Blitmap
+                      </P>
+                    </Flex>
+                    <Flex alignItems="center" mt={2}>
+                      <Box>
+                        <img
+                          src="/ether.png"
+                          style={{ width: 30, marginLeft: -2 }}
+                        />
+                      </Box>
+                      <Stat>
+                        {collection ? shortenNumber(collection.floor || 0) : 0}
+                      </Stat>
+                    </Flex>
+                    <P mb={0} mt={2} color="textSecondary" fontSize={14}>
+                      Highest Offer
                     </P>
-                    <Stat>
-                      Ξ{collection ? shortenNumber(collection.floor || 0) : 0}
-                    </Stat>
-                    <P color="primary">
-                      {collection
-                        ? formatMoney(collection.floor * exchangeRate)
-                        : 0}
+                  </Box>
+                </a>
+              </Link>
+            </Pane>
+            <Pane bg="black">
+              <Link href="/collections/blitmap">
+                <a>
+                  <Box p={3}>
+                    <Flex alignItems="center" mb={3}>
+                      <img
+                        src="/blitnaut.png"
+                        style={{
+                          width: 30,
+                          height: 30,
+                          border: "1px solid rgba(255,255,255,0.3)",
+                          borderRadius: "50%"
+                        }}
+                      />
+                      <P fontSize={14} ml={2}>
+                        The Blitnauts
+                      </P>
+                    </Flex>
+
+                    <Flex alignItems="center" mt={2}>
+                      <Box>
+                        <img
+                          src="/ether.png"
+                          style={{ width: 30, marginLeft: -2 }}
+                        />
+                      </Box>
+                      <Stat>
+                        {blitnauts ? shortenNumber(blitnauts.floor || 0) : 0}
+                      </Stat>
+                    </Flex>
+                    <P mb={0} mt={2} color="textSecondary" fontSize={14}>
+                      Entry Price
                     </P>
                   </Box>
                 </a>

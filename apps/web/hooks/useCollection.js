@@ -3,6 +3,7 @@ import api from "@api";
 import GenesisItem from "@ui/organisms/NFTs/Genesis";
 import MLootItem from "@ui/organisms/NFTs/mLoot";
 import LootItem from "@ui/organisms/NFTs/Loot";
+import Blitmap from "@ui/organisms/NFTs/Blitmap";
 import { gweiToEth } from "@utils";
 
 export const customCollectionData = {
@@ -138,6 +139,7 @@ export const customCollectionData = {
 
     discord: "https://discord.gg/blitmap",
     twitter: "https://twitter.com/blitmap",
+    Item: Blitmap,
     home: "https://blitmap.com",
     etherscan:
       "https://etherscan.io/address/0x8d04a8c79cEB0889Bdd12acdF3Fa9D207eD3Ff63",
